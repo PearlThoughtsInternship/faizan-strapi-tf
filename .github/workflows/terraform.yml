@@ -11,7 +11,14 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+  - name: 'Terraform'
+  - name: Azure Login
+  uses: azure/login@v1
+  with:
+    enable-AzPSSession: false
+    environment: azurecloud
+    allow-no-subscriptions: false
+    audience: api://AzureADTokenExchange
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_AR }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET_AR }}
@@ -36,11 +43,10 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.6.2
-        
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS_AR }}
+    - name: Install Azure CLI
+  run: |
+    sudo apt-get update
+    sudo apt-get install -y azure-cli
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
