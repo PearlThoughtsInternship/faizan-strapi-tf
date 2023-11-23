@@ -59,6 +59,9 @@ jobs:
     - name: Set My Output
       run: echo "myOutput=some_value" >> $GITHUB_ENV
 
+    - name: Azure Login
+      run: az login --service-principal -u ${{ secrets.9b7233ab-7b62-4d50-9f7c-885dc34800ef }} -p ${{ secrets.lwD8Q~qf6._JMF~q4DiTRY75Zkqp9qElI~XUNdsG }} --tenant ${{ secrets.7a4b05fe-967b-4634-b55c-ff833ff39e94 }}
+
     - name: Terraform Init
       run: terraform init
 
