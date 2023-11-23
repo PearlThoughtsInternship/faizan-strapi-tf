@@ -14,12 +14,7 @@ jobs:
   - name: 'Terraform'
   - name: Azure Login
   uses: azure/login@v1
-  with:
-    enable-AzPSSession: false
-    environment: azurecloud
-    allow-no-subscriptions: false
-    audience: api://AzureADTokenExchange
-    env:
+
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_AR }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET_AR }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID_AR }}
